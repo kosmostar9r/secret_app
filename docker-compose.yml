@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  secrets-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      POETRY_VIRTUALENVS_PATH: /poetry
+      APP_RUN__ROOT_PATH: /api
+    ports:
+      - 8080:8080/tcp
+    volumes:
+      - ./data/app:/poetry:rw
+      - ./src:/app/src:ro
+      - ./pyproject.toml:/app/pyproject.toml:ro
+      - ./poetry.lock:/app/poetry.lock:rw
+    command: server

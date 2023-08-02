@@ -1,0 +1,24 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "secrets_app"
+version = "0.1.0"
+description = "one-time secret generator"
+authors = ["LeksaKonovalov <kosmostar9r@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "secrets_app" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.100.1"
+pydantic-settings = "^2.0.2"
+uvicorn = "^0.23.2"
+
+[tool.poetry.scripts]
+server = { callable = "secrets_app.bin.server:main" }
+
+[tool.coverage.run]
+branch = true
+source_pkgs = ["secrets_app"]
