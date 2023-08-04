@@ -3,18 +3,26 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "secrets_app"
+name = "secrets-app"
 version = "0.1.0"
 description = "one-time secret generator"
 authors = ["LeksaKonovalov <kosmostar9r@gmail.com>"]
-readme = "README.md"
-packages = [{ include = "secrets_app" }]
+packages = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = "^0.100.1"
-pydantic-settings = "^2.0.2"
 uvicorn = "^0.23.2"
+uvloop = "^0.17.0"
+asyncio = "^3.4.3"
+sqlalchemy = "<2"
+pydantic = "1.10.5"
+asyncpg = "^0.28.0"
+sqlmodel = "^0.0.8"
+cryptography = "^41.0.3"
+slowapi = "^0.1.8"
+pytest = "^7.4.0"
+httpx = "^0.24.1"
 
 [tool.poetry.scripts]
 server = { callable = "secrets_app.bin.server:main" }

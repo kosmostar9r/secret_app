@@ -6,12 +6,23 @@ services:
       dockerfile: Dockerfile
     environment:
       POETRY_VIRTUALENVS_PATH: /poetry
-      APP_RUN__ROOT_PATH: /api
+      RUN__ROOT_PATH: /api
+      POSTGRES_URL: postgresql+asyncpg://postgres:postgres@secret-postgres/postgres
     ports:
       - 8080:8080/tcp
     volumes:
       - ./data/app:/poetry:rw
       - ./src:/app/src:ro
       - ./pyproject.toml:/app/pyproject.toml:ro
-      - ./poetry.lock:/app/poetry.lock:rw
+      - ./poetry.lock:/app/poetry.lock:ro
+      - ./tests:/app/tests:ro
     command: server
+  secret-postgres:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432/tcp
